@@ -1,0 +1,7 @@
+
+    static ArrayList<Integer> bubble_sort(ArrayList<Integer> arr) {
+        
+        Collections.sort(arr);
+        
+        return arr;
+    }
