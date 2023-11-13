@@ -1,0 +1,37 @@
+
+    /*
+    For your reference:
+    class BinaryTreeNode {
+        Integer value;
+        BinaryTreeNode left;
+        BinaryTreeNode right;
+
+        BinaryTreeNode(Integer value) {
+            this.value = value;
+            this.left = null;
+            this.right = null;
+        }
+    }
+    */
+    static BinaryTreeNode build_a_bst(ArrayList<Integer> values) {
+        // Write your code here.
+        BinaryTreeNode bst= null;
+        for (Integer value:values) {
+            bst = insertNode(bst, value);
+        }
+        return bst;
+    }
+    
+    static BinaryTreeNode insertNode(BinaryTreeNode bst, Integer value) {
+        if(bst == null) {
+            bst = new BinaryTreeNode (value); 
+            return bst;
+        }
+        if(value < bst.value) {
+            bst.left = insertNode(bst.left, value);
+        } else {
+            bst.right = insertNode(bst.right, value);
+        }
+        
+        return bst;
+    }

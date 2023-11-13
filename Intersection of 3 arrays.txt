@@ -1,0 +1,35 @@
+    /*
+    * Asymptotic complexity in terms of size of `arr1` `L`, size of `arr2` `M` and size of `arr3` `N`:
+    * Time: O(L + M + N).
+    * Auxiliary space: O(1).
+    * Total space: O(L + M + N).
+    */
+
+    static ArrayList<Integer> find_intersection(ArrayList<Integer> arr1, ArrayList<Integer> arr2, ArrayList<Integer> arr3) {
+        ArrayList<Integer> result = new ArrayList<Integer>();
+
+        int i = 0, j = 0, k = 0;
+        int L = arr1.size(), M = arr2.size(), N = arr3.size();
+
+        while ((i < L) && (j < M) && (k < N)) {
+
+            if ((arr1.get(i).equals(arr2.get(j))) && (arr2.get(j).equals(arr3.get(k)))) {
+                result.add(arr1.get(i));
+            }
+
+            int mini = Math.min(arr1.get(i), arr2.get(j));
+            mini = Math.min(mini, arr3.get(k));
+
+            if (mini == arr1.get(i))
+                i++;
+            if (mini == arr2.get(j))
+                j++;
+            if (mini == arr3.get(k))
+                k++;
+        }
+
+        if (result.size() == 0)
+            result.add(-1);
+
+        return result;
+    }
