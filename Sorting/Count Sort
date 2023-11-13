@@ -1,0 +1,45 @@
+static ArrayList<Integer> counting_sort(ArrayList<Integer> arr) {
+        //Part 1: Find the minimum and maximum values of the input
+        //        array elements to be sorted.
+        int min = arr.get(0);
+        int max = arr.get(0);
+        
+        //Set the min and max values
+        for(int eachNum : arr) {
+            if(eachNum < min) {
+                min = eachNum;
+            } else if(eachNum > max) {
+                max = eachNum;
+            }
+        }
+        
+        //Part 2: Set the size of the auxiliary array
+        int[] countArray = new int[max-min+1];
+        
+        //Traverse through the input array and 
+        // set the auxiliary array: 
+        // Each element in the auxiliary array 
+        // represents the number of occurance 
+        // of the value (minimum value + 1 increment) it represents
+        // in the input array
+        for(int i = 0; i < arr.size(); i++) {
+            int val = arr.get(i);
+            countArray[val-min]++;
+        }
+        
+        //Set the array index
+        int arrindex = 0;
+        
+        for(int j = 0; j < max-min+1; j++){
+            int count = countArray[j];
+            
+            while(count>0){
+                arr.set(arrindex, j + min);
+                arrindex++;
+                count--;
+            }
+        }
+        
+        
+        return arr;
+    }
