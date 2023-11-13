@@ -1,0 +1,51 @@
+
+    static ArrayList<Integer> heap_sort(ArrayList<Integer> arr) {
+
+        int[] input = new int[arr.size()];
+        
+        for(int i = 0; i < arr.size(); i++){
+            input[i] = arr.get(i);
+        }
+        
+        // heapify
+        for (int i = input.length/2; i >= 0; i--){
+            heapify(input, i, input.length - 1);
+        }
+        
+        // sort the array
+        int length = input.length - 1;
+        for (int i = length; i > 0; i--){
+            swap(input, i, 0);
+            length -= 1;
+            heapify(input, 0, length);
+        }
+        
+        for (int i = 0; i < input.length; i++){
+            arr.set(i, input[i]);
+        }
+        
+        return arr;
+    }
+    
+    static void swap(int[] input, int i, int j){
+        int temp = input[i];
+        input[i] = input[j];
+        input[j] = temp;
+    }
+    
+    static void heapify(int[] input, int i, int length){
+        // find the largest element among parent, left, right
+        int largest = i;
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+        
+        if (left <= length && input[left] > input[largest])
+            largest = left;
+        if (right <= length && input[right] > input[largest])
+            largest = right;
+        
+        if(largest != i){
+            swap(input, i, largest);
+            heapify(input, largest, length);
+        }
+    }
