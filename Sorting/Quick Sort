@@ -1,0 +1,29 @@
+
+    static ArrayList<Integer> quick_sort(ArrayList<Integer> arr) {
+        // Write your code here.
+        helper(arr, 0, arr.size()-1);
+        return arr;
+    }
+    
+    static void helper(ArrayList<Integer> arr, int start, int end){
+        // leaf node
+        if (start >= end)
+        return;
+        // random pivot
+        int randomPivot = new Random().nextInt((end -start)+1)+start;
+        Collections.swap(arr, start, randomPivot);
+        int smaller =start;
+        int pivot = arr.get(start);
+        for(int bigger = start+1; bigger <= end ; bigger ++){
+            if(arr.get(bigger)< pivot){
+                smaller++;
+                Collections.swap(arr, smaller, bigger);
+                
+            }
+        }
+        Collections.swap(arr, smaller, start);
+        
+        // sub problems
+        helper(arr, start, smaller-1);
+        helper(arr, smaller+1, end);
+    }
